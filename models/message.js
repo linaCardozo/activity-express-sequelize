@@ -14,9 +14,11 @@ Message.init(
       allowNull: false,
     },
     ts: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
+      type: "TIMESTAMP",
+      // type: "TIMESTAMP",
+      // defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      //defaultValue: Date.now(),
     },
   },
   {

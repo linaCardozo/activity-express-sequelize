@@ -17,10 +17,10 @@ const handleSubmit = (evt) => {
 
   const msg = document.getElementById("message");
   const aut = document.getElementById("author");
-  const var_ts = document.getElementById("ts");
+  const var_ts = Date.now();
   ws.send(msg.value);
   ws.send(aut.value);
-  ws.send(var_ts.value);
+  ws.send(var_ts);
 
   // Message.create({
   //   message: msg.value,

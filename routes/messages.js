@@ -18,7 +18,7 @@ router.get("/:ts", function (req, res, next) {
     if (result === null)
       return res
         .status(404)
-        .send("The message with the given timestamp was not found.");
+        .send("A message with the given timestamp was not found.");
     res.send(result);
   });
   /*const msg = msgs.find((item) => item.ts === parseInt(req.params.ts));
@@ -34,16 +34,15 @@ router.post("/", function (req, res, next) {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-  if (req.body.ts === undefined) {
-    return res.status(400).send("Timestamp is required");
-  }
 
   // Desestructuración para guardar los parámetros del body
-  const { message, author, ts } = req.body;
+  const { message, author } = req.body;
+  const ts = Date.now();
 
   Message.create({ message, author, ts }).then((response) => {
     res.send(response);
   });
+
   /*
   const msg = {
     message: req.body.message,
@@ -77,7 +76,7 @@ router.put("/:ts", function (req, res, next) {
     if (result[0] === 0)
       return res
         .status(404)
-        .send("The message with the given timestamp was not found.");
+        .send("A message with the given timestamp was not found.");
     res.status(200).send("Message updated!");
   });
 
@@ -102,7 +101,7 @@ router.delete("/:ts", function (req, res, next) {
     if (result === 0)
       return res
         .status(404)
-        .send("The message with the given timestamp was not found.");
+        .send("A message with the given timestamp was not found.");
     res.status(204).send();
   });
 });
@@ -110,8 +109,7 @@ router.delete("/:ts", function (req, res, next) {
 function validateMessage(message) {
   const schema = Joi.object({
     message: Joi.string().min(5).required(),
-    author: Joi.string().required().pattern(new RegExp("^[A-z A-z]*$")),
-    ts: Joi.number(),
+    author: Joi.string().required().pattern(new RegExp("^[A-z A-z]+")),
   });
 
   return schema.validate(message);

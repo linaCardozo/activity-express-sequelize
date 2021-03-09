@@ -12,6 +12,7 @@
     "joi": "^17.4.0",
     "morgan": "~1.9.1",
     "sequelize": "^6.5.0",
+    "sequelize-mysql-timestamp": "^1.4.0",
     "sqlite3": "^5.0.2",
     "ws": "^7.4.4"
   }
